@@ -11,3 +11,5 @@ yarn-error.log
 *.ntvs*
 *.njsproj
 *.sln
+
+database/config/config.json

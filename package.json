@@ -4,7 +4,10 @@
   "private": true,
   "scripts": {
     "dev": "nodemon ./bin/www",
-    "server": "node ./bin/www"
+    "server": "node ./bin/www",
+    "migrate" : "cd ./database && sequelize db:migrate",
+    "migrate:rollback" : "cd ./database && sequelize db:migrate:undo:all",
+    "migrate:refresh" : "npm run migrate:rollback && npm run migrate"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",

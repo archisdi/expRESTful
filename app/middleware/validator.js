@@ -6,7 +6,11 @@ module.exports = async (req, res, next) => {
     const input = Input(req);
     const validated = await Joi.validate(input, req.schema, { stripUnknown: true, abortEarly: false })
         .catch(err => {
-            return next(Error('validation error', 422, err.details));
+            const details = err.details.reduce((res, item) => {
+                res[item.context.key] = item.message.replace(/"/g, '');
+                return res;
+            },{})
+            return next(Error('validation error', 422, details));
         });
 
     req.query = validated.query;

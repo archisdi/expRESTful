@@ -12,8 +12,8 @@ exports.profile = async (req, res, next) => {
     const response = {
         name: user.name,
         username: user.username
-    }
+    };
     return Response(res, 'successfully retrieved profile data', 200, response);
-}
+};
 
 module.exports = exports;

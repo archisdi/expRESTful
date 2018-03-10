@@ -3,4 +3,4 @@ module.exports = (message, status = 500, detail = null) => {
     err.status = status;
     if (detail) err.detail = detail;
     return err;
-}
+};

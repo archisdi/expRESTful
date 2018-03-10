@@ -1,6 +1,6 @@
 module.exports = {
-    up: function (queryInterface, DataTypes) {
-        return queryInterface.createTable('users', {
+    up: (queryInterface, DataTypes) => {
+        const schema = queryInterface.createTable('users', {
             id: {
                 type: DataTypes.INTEGER(10).UNSIGNED,
                 allowNull: false,
@@ -35,9 +35,9 @@ module.exports = {
                 field: 'updated_at'
             }
         });
+
+        return schema;
     },
 
-    down: function (queryInterface, Sequelize) {
-        return queryInterface.dropTable('users');
-    }
+    down: (queryInterface, Sequelize) => queryInterface.dropTable('users')
 };

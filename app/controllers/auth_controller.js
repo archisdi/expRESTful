@@ -24,8 +24,8 @@ exports.login = async (req, res, next) => {
 
         return Response(res, 'login successfull', 200, response);
     } catch (err) {
-        return next(Error(err.message))
+        return next(Error(err.message));
     }
-}
+};
 
 module.exports = exports;

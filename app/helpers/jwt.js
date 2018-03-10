@@ -1,14 +1,8 @@
 const JWT = require('jsonwebtoken');
 const config = require('../../config/jwt');
 
-exports.create = (credentials) => {
-    return JWT.sign(credentials, config.secret, {
-        expiresIn: config.expired
-    });
-}
+exports.create = credentials => JWT.sign(credentials, config.secret, { expiresIn: config.expired });
 
-exports.verify = async token => {
-    return await JWT.verify(token, config.secret);
-}
+exports.verify = token => JWT.verify(token, config.secret);
 
 module.exports = exports;

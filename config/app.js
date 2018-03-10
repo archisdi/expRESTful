@@ -5,4 +5,4 @@ module.exports = {
         retry: process.env.RATE_RETRY || 60000
     },
     apiKey: process.env.API_SECRET
-}
+};

@@ -4,4 +4,4 @@ module.exports = (res, message, status = 200, content = null) => {
         status,
         content
     });
-}
+};

@@ -8,7 +8,8 @@
     "clean-install": "rm -rf node_modules package-lock.json && npm install --save",
     "migrate": "cd ./database && sequelize db:migrate",
     "migrate:rollback": "cd ./database && sequelize db:migrate:undo:all",
-    "migrate:refresh": "npm run migrate:rollback && npm run migrate"
+    "migrate:refresh": "npm run migrate:rollback && npm run migrate",
+    "seeder": "cd ./database && sequelize db:seed:all"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",

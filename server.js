@@ -11,7 +11,6 @@ const routes = require('./routes');
 
 const app = express();
 
-// Golbal Middleware
 app.use(Helmet());
 app.use(logger('dev'));
 app.use(bodyParser.json());

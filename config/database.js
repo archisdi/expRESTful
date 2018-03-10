@@ -5,7 +5,8 @@ exports.sql = {
     host: process.env.DB_HOST || '127.0.0.1',
     port: process.env.DB_PORT || '3306',
     dialect: 'mysql',
-    logging: process.env.DB_LOG === 'true' ? true : false || false
+    logging: process.env.DB_LOG === 'true' ? console.log : false || false,
+    operatorsAliases: false
 };
 
 exports.mongo = {

@@ -7,6 +7,11 @@ const schemas = {
             username: Joi.string().required(),
             password: Joi.string().required()
         }).required()
+    }),
+    refresh: Joi.object({
+        body: Joi.object({
+            refresh_token: Joi.string().required()
+        }).required()
     })
 };
 

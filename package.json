@@ -1,5 +1,5 @@
 {
-  "name": "express-boilerplate-api",
+  "name": "express-api-server",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -20,8 +20,10 @@
     "helmet": "^3.12.0",
     "joi": "^13.1.2",
     "jsonwebtoken": "^8.2.0",
+    "moment": "^2.21.0",
     "morgan": "~1.9.0",
     "mysql2": "^1.5.2",
+    "randomstring": "^1.1.5",
     "sequelize": "^4.35.2"
   },
   "devDependencies": {

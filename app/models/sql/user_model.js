@@ -1,5 +1,8 @@
+const bcrypt = require('bcryptjs');
+const moment = require('moment');
+
 module.exports = function (sequelize, DataTypes) {
-    return sequelize.define('User', {
+    const Member = sequelize.define('User', {
         id: {
             type: DataTypes.INTEGER(10).UNSIGNED,
             allowNull: false,
@@ -23,6 +26,16 @@ module.exports = function (sequelize, DataTypes) {
             allowNull: false,
             field: 'password'
         },
+        refreshToken: {
+            type: DataTypes.STRING(255),
+            allowNull: true,
+            field: 'refresh_token'
+        },
+        tokenValidity: {
+            type: DataTypes.DATE,
+            allowNull: true,
+            field: 'token_validity'
+        },
         createdAt: {
             type: DataTypes.DATE,
             allowNull: true,
@@ -34,4 +47,21 @@ module.exports = function (sequelize, DataTypes) {
             field: 'updated_at'
         }
     }, { tableName: 'users' });
+
+    Member.associate = (models) => {
+        // Member.belongsTo(models.model_name, {
+        //     foreignKey: 'model_name_id',
+        //     targetKey: 'id'
+        // });
+    };
+
+    Member.prototype.validateAuth = function (password) {
+        return bcrypt.compareSync(password, this.password);
+    };
+
+    Member.prototype.validateRefresh = function (password) {
+        return moment() < moment(this.tokenValidity);
+    };
+
+    return Member;
 };

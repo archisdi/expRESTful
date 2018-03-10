@@ -1,8 +1,12 @@
 const db = require('../models/sql');
 
+exports.findOneWithFullCredential = async conditions => db.User.findOne({
+    where: conditions
+});
+
 exports.findOne = async conditions => db.User.findOne({
     where: conditions,
-    attributes: ['id', 'name', 'username', 'password']
+    attributes: ['id', 'name', 'username']
 });
 
 exports.findAll = async () => db.User.findAll({

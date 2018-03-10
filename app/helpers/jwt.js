@@ -1,8 +1,15 @@
 const JWT = require('jsonwebtoken');
-const config = require('../../config/jwt');
+const Config = require('../../config/jwt');
+const RandomString = require('randomstring');
+const Moment = require('moment');
 
-exports.create = credentials => JWT.sign(credentials, config.secret, { expiresIn: config.expired });
+exports.create = async credentials => JWT.sign(credentials, Config.secret, { expiresIn: Config.expired });
 
-exports.verify = token => JWT.verify(token, config.secret);
+exports.verify = async token => JWT.verify(token, Config.secret);
+
+exports.generateRefreshToken = async () => ({
+    token: RandomString.generate({ length: 50 }),
+    validity: Moment().add(Config.refresh_token_expired, 'seconds')
+});
 
 module.exports = exports;

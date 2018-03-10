@@ -24,6 +24,16 @@ module.exports = {
                 allowNull: false,
                 field: 'password'
             },
+            refreshToken: {
+                type: DataTypes.STRING(255),
+                allowNull: true,
+                field: 'refresh_token'
+            },
+            tokenValidity: {
+                type: DataTypes.DATE,
+                allowNull: true,
+                field: 'token_validity'
+            },
             createdAt: {
                 type: DataTypes.DATE,
                 allowNull: true,

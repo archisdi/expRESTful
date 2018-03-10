@@ -9,7 +9,8 @@ module.exports = async (req, res, next) => {
     try {
         req.user = await JWT.verify(token);
     } catch (err) {
-        return next(Error(`Invalid Token, ${err.message}`, 401));
+        const message = err.message === 'jwt expired' ? 'Token Expired' : 'Invalid Token';
+        return next(Error(message, 401));
     }
 
     return next();

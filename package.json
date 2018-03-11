@@ -6,10 +6,10 @@
     "dev": "nodemon ./bin/www",
     "server": "node ./bin/www",
     "clean-install": "rm -rf node_modules package-lock.json && npm install --save",
-    "migrate": "cd ./database && sequelize db:migrate",
-    "migrate:rollback": "cd ./database && sequelize db:migrate:undo:all",
-    "migrate:refresh": "npm run migrate:rollback && npm run migrate",
-    "seeder": "cd ./database && sequelize db:seed:all"
+    "migrate": "./scripts/migrations/migrate.sh",
+    "migrate:rollback": "./scripts/migrations/rollback.sh",
+    "migrate:refresh": "./scripts/migrations/refresh.sh",
+    "db:seed": "./scripts/migrations/seed.sh"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",

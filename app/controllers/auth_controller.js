@@ -1,5 +1,5 @@
 const Response = require('../helpers/api_response');
-const UserRepo = require('../repository/user_repo');
+const UserRepo = require('../repositories/user_repo');
 const JWT = require('../helpers/jwt');
 const Error = require('../helpers/error');
 const UserTransformer = require('../transformers/user_transformer');

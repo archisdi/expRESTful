@@ -4,6 +4,8 @@ dist/
 npm-debug.log
 yarn-error.log
 .env
+coverage
+.nyc_output
 
 # Editor directories and files
 .idea

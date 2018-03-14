@@ -9,7 +9,9 @@
     "migrate": "./scripts/migrations/migrate.sh",
     "migrate:rollback": "./scripts/migrations/rollback.sh",
     "migrate:refresh": "./scripts/migrations/refresh.sh",
-    "db:seed": "./scripts/migrations/seed.sh"
+    "db:seed": "./scripts/migrations/seed.sh",
+    "tests": "NODE_ENV=test nyc --reporter=html --reporter=text ava --verbose",
+    "tests-report": "open coverage/index.html"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
@@ -35,6 +37,30 @@
     "eslint-plugin-jsx-a11y": "^6.0.3",
     "eslint-plugin-react": "^7.7.0",
     "nodemon": "^1.17.1",
+    "nyc": "^11.6.0",
     "supertest": "^3.0.0"
+  },
+  "nyc": {
+    "per-file": true,
+    "lines": 95,
+    "statements": 95,
+    "functions": 95,
+    "branches": 95,
+    "reporter": [
+      "lcov"
+    ],
+    "exclude": [
+      "app/repositories/*.js",
+      "tests/**"
+    ]
+  },
+  "ava": {
+    "files": [
+      "tests/**/*.test.js"
+    ],
+    "failFast": false,
+    "failWithoutAssertions": false,
+    "tap": false,
+    "powerAssert": true
   }
 }

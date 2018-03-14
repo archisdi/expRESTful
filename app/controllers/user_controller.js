@@ -1,5 +1,5 @@
 const Response = require('../helpers/api_response');
-const UserRepo = require('../repository/user_repo');
+const UserRepo = require('../repositories/user_repo');
 const Error = require('../helpers/error');
 
 exports.profile = async (req, res, next) => {

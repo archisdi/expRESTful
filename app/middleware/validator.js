@@ -4,7 +4,13 @@ const Error = require('../helpers/error');
 
 module.exports = async (req, res, next) => {
     const input = Input(req);
-    const validated = await Joi.validate(input, req.schema, { stripUnknown: true, abortEarly: false })
+    await Joi.validate(input, req.schema, { stripUnknown: true, abortEarly: false })
+        .then((validated) => {
+            req.query = validated.query;
+            req.params = validated.params;
+            req.body = validated.body;
+            return next();
+        })
         .catch((err) => {
             const details = err.details.reduce((detail, item) => {
                 detail[item.context.key] = item.message.replace(/"/g, '');
@@ -12,10 +18,4 @@ module.exports = async (req, res, next) => {
             }, {});
             return next(Error('validation error', 422, details));
         });
-
-    req.query = validated.query;
-    req.params = validated.params;
-    req.body = validated.body;
-
-    return next();
 };

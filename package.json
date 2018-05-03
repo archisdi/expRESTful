@@ -28,7 +28,8 @@
     "morgan": "~1.9.0",
     "mysql2": "^1.5.2",
     "randomstring": "^1.1.5",
-    "sequelize": "^4.35.2"
+    "sequelize": "^4.35.2",
+    "uuid": "^3.2.1"
   },
   "devDependencies": {
     "ava": "^0.25.0",

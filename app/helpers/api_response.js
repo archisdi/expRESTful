@@ -1,7 +1,5 @@
-module.exports = (res, message, status = 200, content = null) => {
-    return res.status(status).json({
-        message,
-        status,
-        content
-    });
-};
+module.exports = (res, message, status = 200, content = null) => res.status(status).json({
+    message,
+    status,
+    content
+});

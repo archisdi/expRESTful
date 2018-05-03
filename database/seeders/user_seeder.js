@@ -1,4 +1,5 @@
 const bcrypt = require('bcryptjs');
+const uuid = require('uuid/v4');
 
 module.exports = {
     up: (queryInterface, Sequelize) => {
@@ -8,6 +9,7 @@ module.exports = {
 
         const users = names.map(item => ({
             name: item,
+            uuid: uuid(),
             username: item,
             password: bcrypt.hashSync(item, 8),
             created_at: new Date(),

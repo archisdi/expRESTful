@@ -8,6 +8,11 @@ module.exports = {
                 autoIncrement: true,
                 field: 'id'
             },
+            uuid: {
+                type: DataTypes.UUID,
+                field: 'uuid',
+                defaultValue: DataTypes.UUIDV4
+            },
             name: {
                 type: DataTypes.STRING(255),
                 allowNull: false,

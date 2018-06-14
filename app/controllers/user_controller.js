@@ -1,6 +1,6 @@
-const Response = require('../helpers/api_response');
+const Response = require('../utils/api_response');
 const UserRepo = require('../repositories/user_repo');
-const Error = require('../helpers/error');
+const Error = require('../utils/error');
 
 exports.profile = async (req, res, next) => {
     let user;

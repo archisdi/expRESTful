@@ -1,4 +1,4 @@
-const db = require('../models/sql');
+const db = require('../models/sequelize');
 
 exports.findOneWithFullCredential = async conditions => db.User.findOne({
     where: conditions

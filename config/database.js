@@ -1,4 +1,4 @@
-exports.sql = {
+exports.sequelize = {
     table: process.env.DB_NAME,
     username: process.env.DB_USERNAME || 'root',
     password: process.env.DB_PASSWORD || '',
@@ -9,7 +9,7 @@ exports.sql = {
     operatorsAliases: false
 };
 
-exports.mongo = {
+exports.mongodb = {
 
 };
 

@@ -1,27 +1,32 @@
 const express = require('express');
 const logger = require('morgan');
 const bodyParser = require('body-parser');
-const ErrorException = require('./exceptions/error_exception');
-const NotFoundException = require('./exceptions/not_found_exception');
-const ApiGuard = require('./middlewares/request-handler/api_guard');
-const RateLimiter = require('./utils/rate_limiter');
-const Helmet = require('helmet');
-const Cors = require('cors');
-const routes = require('./routes');
+const apiGuard = require('./middlewares/request-handler/api_guard');
+const rateLimiter = require('./utils/rate_limiter');
+const helmet = require('helmet');
+const cors = require('cors');
+
+const routeHandler = require('./routes');
+const exceptionHandler = require('./exceptions');
 
 const app = express();
 
-app.use(Helmet());
-app.use(Cors());
+/** Plugins */
+app.use(helmet());
+app.use(cors());
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(ApiGuard);
-app.use(RateLimiter());
+/** */
 
-routes(app);
+/** Global Middlewares */
+app.use(apiGuard);
+app.use(rateLimiter());
+/** */
 
-app.use(NotFoundException);
-app.use(ErrorException);
+/** App Handlers */
+routeHandler(app);
+exceptionHandler(app);
+/** */
 
 module.exports = app;

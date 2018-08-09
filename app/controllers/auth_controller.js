@@ -2,7 +2,7 @@ const Response = require('../utils/api_response');
 const UserRepo = require('../repositories/user_repo');
 const JWT = require('../utils/jwt');
 const Error = require('../utils/error');
-const UserTransformer = require('../transformers/user_transformer');
+const UserTransformer = require('../utils/transformers/user_transformer');
 
 exports.login = async (req, res, next) => {
     try {

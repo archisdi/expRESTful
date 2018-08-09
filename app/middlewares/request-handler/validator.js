@@ -1,6 +1,6 @@
 const Joi = require('joi');
-const Input = require('../utils/request_input');
-const Error = require('../utils/error');
+const Input = require('../../utils/request_input');
+const Error = require('../../utils/error');
 
 module.exports = async (req, res, next) => {
     const input = Input(req);

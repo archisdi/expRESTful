@@ -1,5 +1,5 @@
 const Joi = require('joi');
-const validator = require('../middlewares/validator');
+const validator = require('../../middlewares/request-handler/validator');
 
 const schemas = {
     login: Joi.object({

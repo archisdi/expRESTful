@@ -1,5 +1,5 @@
-const JWT = require('../utils/jwt');
-const Error = require('../utils/error');
+const JWT = require('../../utils/jwt');
+const Error = require('../../utils/error');
 
 module.exports = async (req, res, next) => {
     const token = req.headers.authorization;

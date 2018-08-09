@@ -1,28 +1,62 @@
 require('dotenv').config();
-const express = require('express');
-const logger = require('morgan');
-const bodyParser = require('body-parser');
-const ErrorException = require('./app/exceptions/error_exception');
-const NotFoundException = require('./app/exceptions/not_found_exception');
-const ApiGuard = require('./app/middleware/api_guard');
-const RateLimiter = require('./app/utils/rate_limiter');
-const Helmet = require('helmet');
-const Cors = require('cors');
-const routes = require('./routes');
 
-const app = express();
+const app = require('./app');
+const debug = require('debug')('express-boilerplate-api:server');
+const http = require('http');
 
-app.use(Helmet());
-app.use(Cors());
-app.use(logger('dev'));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(ApiGuard);
-app.use(RateLimiter());
+const port = normalizePort(process.env.APP_PORT || '3000');
+app.set('port', port);
 
-routes(app);
+const server = http.createServer(app);
 
-app.use(NotFoundException);
-app.use(ErrorException);
+server.listen(port);
+server.on('error', onError);
+server.on('listening', onListening);
 
-module.exports = app;
+function normalizePort(val) {
+  const port = parseInt(val, 10);
+
+  if (isNaN(port)) {
+    // named pipe
+    return val;
+  }
+
+  if (port >= 0) {
+    // port number
+    return port;
+  }
+
+  return false;
+}
+
+function onError(error) {
+  if (error.syscall !== 'listen') {
+    throw error;
+  }
+
+  const bind = typeof port === 'string'
+    ? 'Pipe ' + port
+    : 'Port ' + port;
+
+  // handle specific listen errors with friendly messages
+  switch (error.code) {
+    case 'EACCES':
+      console.error(bind + ' requires elevated privileges');
+      process.exit(1);
+      break;
+    case 'EADDRINUSE':
+      console.error(bind + ' is already in use');
+      process.exit(1);
+      break;
+    default:
+      throw error;
+  }
+}
+
+function onListening() {
+  const addr = server.address();
+  const bind = typeof addr === 'string'
+    ? 'pipe ' + addr
+    : 'port ' + addr.port;
+  debug('Listening on ' + bind);
+}

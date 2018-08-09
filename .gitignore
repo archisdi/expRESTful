@@ -6,6 +6,7 @@ yarn-error.log
 .env
 coverage
 .nyc_output
+storage/*
 
 # Editor directories and files
 .idea

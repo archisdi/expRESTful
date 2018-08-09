@@ -3,8 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "nodemon ./bin/www",
-    "server": "node ./bin/www",
+    "dev": "nodemon ./server.js",
+    "server": "node ./server.js",
     "clean-install": "rm -rf node_modules package-lock.json && npm install --save",
     "migrate": "./scripts/migrations/migrate.sh",
     "migrate:rollback": "./scripts/migrations/rollback.sh",

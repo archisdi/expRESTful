@@ -6,11 +6,11 @@ const Sequelize = require('sequelize');
 
 const basename = path.basename(__filename);
 // const env = process.env.NODE_ENV || 'development';
-const { sequelize } = require('../../../config/database');
+const { sequelize: config } = require('../../../config/database');
 
 const db = {};
 
-const sequelize = new Sequelize(sequelize.table, sequelize.username, sequelize.password, sequelize);
+const sequelize = new Sequelize(config.table, config.username, config.password, config);
 
 fs
     .readdirSync(__dirname)

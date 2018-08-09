@@ -1,5 +1,5 @@
 const JWT = require('jsonwebtoken');
-const Config = require('../../config/jwt');
+const Config = require('../config/jwt');
 const RandomString = require('randomstring');
 const Moment = require('moment');
 

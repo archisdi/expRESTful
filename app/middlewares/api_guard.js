@@ -1,4 +1,4 @@
-const config = require('../../config/app');
+const config = require('../config/app');
 const Error = require('../utils/error');
 
 module.exports = (req, res, next) => {

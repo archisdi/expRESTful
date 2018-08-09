@@ -1,16 +1,14 @@
-'use strict';
-
 const fs = require('fs');
 const path = require('path');
 const Sequelize = require('sequelize');
 
 const basename = path.basename(__filename);
 // const env = process.env.NODE_ENV || 'development';
-const { sequelize: config } = require('../../../config/database');
+const { sequelize: config } = require('../../config/database');
 
 const db = {};
 
-const sequelize = new Sequelize(config.table, config.username, config.password, config);
+const sequelize = new Sequelize(config.table, config.username, config.password, config.options);
 
 fs
     .readdirSync(__dirname)

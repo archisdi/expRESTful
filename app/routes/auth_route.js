@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const AuthController = require('../controllers/auth_controller');
 const AuthRequest = require('../requests/auth_request');
-const JWTAuth = require('../middleware/jwt_auth');
+const JWTAuth = require('../middlewares/jwt_auth');
 
 router.post('/login', AuthRequest('login'), AuthController.login);
 router.post('/logout', JWTAuth, AuthController.logout);

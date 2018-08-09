@@ -1,5 +1,5 @@
 const RateLimit = require('express-rate-limit');
-const config = require('../../config/app');
+const config = require('../config/app');
 const Error = require('../utils/error');
 
 module.exports = (max = config.rate.max, retry = config.rate.retry) => {

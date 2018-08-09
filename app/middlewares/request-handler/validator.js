@@ -1,9 +1,8 @@
 const Joi = require('joi');
-const Input = require('../../utils/request_input');
-const Error = require('../../utils/error');
+const { requestInput, customError } = require('../../utils/helpers');
 
 module.exports = async (req, res, next) => {
-    const input = Input(req);
+    const input = requestInput(req);
     await Joi.validate(input, req.schema, { stripUnknown: true, abortEarly: false })
         .then((validated) => {
             req.query = validated.query;
@@ -16,6 +15,6 @@ module.exports = async (req, res, next) => {
                 detail[item.context.key] = item.message.replace(/"/g, '');
                 return detail;
             }, {});
-            return next(Error('validation error', 422, details));
+            return next(customError('validation error', 422, details));
         });
 };

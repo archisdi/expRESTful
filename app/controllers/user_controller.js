@@ -1,13 +1,12 @@
-const apiResponse = require('../utils/api_response');
+const { apiResponse, customError } = require('../utils/helpers');
 const UserRepo = require('../repositories/user_repo');
-const Error = require('../utils/error');
 
 exports.profile = async (req, res, next) => {
     let user;
     try {
         user = await UserRepo.findOne({ id: req.user.id }, ['id', 'name', 'username']);
     } catch (err) {
-        return next(Error(err.message));
+        return next(customError(err.message));
     }
     const response = {
         name: user.name,

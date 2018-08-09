@@ -1,14 +1,13 @@
-const apiResponse = require('../utils/api_response');
+const { apiResponse, customError} = require('../utils/helpers');
 const UserRepo = require('../repositories/user_repo');
 const JWT = require('../utils/jwt');
-const Error = require('../utils/error');
 const UserTransformer = require('../utils/transformers/user_transformer');
 
 exports.login = async (req, res, next) => {
     try {
         const user = await UserRepo.findOne({ username: req.body.username });
-        if (!user) return next(Error('Credentials not match', 401));
-        if (!user.validateAuth(req.body.password)) return next(Error('Credentials not match', 401));
+        if (!user) return next(customError('Credentials not match', 401));
+        if (!user.validateAuth(req.body.password)) return next(customError('Credentials not match', 401));
 
         const token = await JWT.create(UserTransformer(user));
 
@@ -23,30 +22,30 @@ exports.login = async (req, res, next) => {
 
         return apiResponse(res, 'login successful', 200, response);
     } catch (err) {
-        return next(Error(err.message));
+        return next(customError(err.message));
     }
 };
 
 exports.logout = async (req, res, next) => {
     try {
         const user = await UserRepo.findOne({ id: req.user.id, username: req.user.username });
-        if (!user) return next(Error('Not Authorized', 401));
+        if (!user) return next(customError('Not Authorized', 401));
 
         await user.update({ refreshToken: null, tokenValidity: null });
 
         return apiResponse(res, 'invalidate refresh token successful', 200);
     } catch (err) {
-        return next(Error(err.message));
+        return next(customError(err.message));
     }
 };
 
 exports.refresh = async (req, res, next) => {
     try {
         const user = await UserRepo.findOne({ refreshToken: req.body.refresh_token });
-        if (!user) return next(Error('Not Authorized', 401));
+        if (!user) return next(customError('Not Authorized', 401));
         if (!user.validateRefresh()) {
             await user.update({ refreshToken: null, tokenValidity: null });
-            return next(Error('Refresh Token Expired', 401));
+            return next(customError('Refresh Token Expired', 401));
         }
 
         const token = await JWT.create({
@@ -60,7 +59,7 @@ exports.refresh = async (req, res, next) => {
 
         return apiResponse(res, 'refresh token successful', 200, response);
     } catch (err) {
-        return next(Error(err.message));
+        return next(customError(err.message));
     }
 };
 

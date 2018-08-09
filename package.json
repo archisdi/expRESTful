@@ -1,6 +1,6 @@
 {
-  "name": "express-api-server",
-  "version": "0.1.0",
+  "name": "exprestful",
+  "version": "1.0.1",
   "private": true,
   "scripts": {
     "dev": "nodemon ./server.js",

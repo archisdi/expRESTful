@@ -1,18 +1,9 @@
 const db = require('../models/sequelize');
 
-exports.findOneWithFullCredential = async conditions => db.User.findOne({
-    where: conditions
-});
+exports.findOne = (conditions, attributes) => db.User.findOne({ where: conditions, attributes });
 
-exports.findOne = async conditions => db.User.findOne({
-    where: conditions,
-    attributes: ['id', 'name', 'username']
-});
+exports.findAll = (conditions, attributes) => db.User.findAll({ where: conditions, attributes });
 
-exports.findAll = async () => db.User.findAll({
-    attributes: ['id', 'name', 'username']
-});
-
-exports.create = async data => db.User.create(data);
+exports.create = data => db.User.create(data);
 
 module.exports = exports;

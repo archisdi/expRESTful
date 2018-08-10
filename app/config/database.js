@@ -6,9 +6,9 @@ exports.sequelize = {
         port: process.env.DB_PORT || '3306',
         dialect: process.env.DB_DIALECT || 'mysql',
         host: process.env.DB_HOST || '127.0.0.1',
-        logging: process.env.APP_DEBUG === 'true' ? console.log : false,
-        operatorsAliases: false,
-    },
+        logging: process.env.APP_DEBUG === 'true' ? console.log : false, //eslint-disable-line
+        operatorsAliases: false
+    }
 };
 
 exports.mongodb = {
@@ -16,4 +16,3 @@ exports.mongodb = {
 };
 
 module.exports = exports;
-

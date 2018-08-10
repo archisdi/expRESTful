@@ -1,4 +1,4 @@
-const { apiResponse, customError} = require('../utils/helpers');
+const { apiResponse, customError } = require('../utils/helpers');
 const UserRepo = require('../repositories/user_repo');
 const JWT = require('../utils/jwt');
 const UserTransformer = require('../utils/transformers/user_transformer');

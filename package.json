@@ -11,7 +11,8 @@
     "migrate:refresh": "./scripts/migrations/refresh.sh",
     "db:seed": "./scripts/migrations/seed.sh",
     "tests": "NODE_ENV=test nyc --reporter=html --reporter=text ava --verbose",
-    "tests-report": "open coverage/index.html"
+    "tests-report": "open coverage/index.html",
+    "lint": "eslint --fix app/**"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
@@ -35,6 +36,7 @@
     "ava": "^0.25.0",
     "eslint": "^4.18.1",
     "eslint-config-airbnb": "^16.1.0",
+    "eslint-config-airbnb-base": "^13.0.0",
     "eslint-plugin-import": "^2.9.0",
     "eslint-plugin-jsx-a11y": "^6.0.3",
     "eslint-plugin-react": "^7.7.0",

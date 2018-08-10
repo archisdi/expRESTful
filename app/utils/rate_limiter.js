@@ -1,9 +1,9 @@
+const RateLimit = require('express-rate-limit');
 const config = require('../config/app');
-const rateLimit = require('express-rate-limit');
 const { customError } = require('../utils/helpers');
 
 module.exports = (max = config.rate.max, retry = config.rate.retry) => {
-    const rateLimiter = new rateLimit({
+    const rateLimiter = new RateLimit({
         windowMs: retry,
         max,
         delayMs: 0,

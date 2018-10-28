@@ -2,6 +2,7 @@ const { apiResponse, customError } = require('../utils/helpers');
 const UserRepo = require('../repositories/user_repo');
 const JWT = require('../utils/jwt');
 const UserTransformer = require('../utils/transformers/user_transformer');
+const Config = require('../config/jwt');
 
 exports.login = async (req, res, next) => {
     try {
@@ -17,7 +18,8 @@ exports.login = async (req, res, next) => {
 
         const response = {
             token,
-            refresh_token: refresh.token
+            refresh_token: refresh.token,
+            expires_in: Config.expired
         };
 
         return apiResponse(res, 'login successful', 200, response);

@@ -1,5 +1,5 @@
 const Joi = require('joi');
-const { requestInput, customError } = require('../../utils/helpers');
+const { requestInput, Exception } = require('../../utils/helpers');
 
 module.exports = async (req, res, next) => {
     const input = requestInput(req);
@@ -15,6 +15,6 @@ module.exports = async (req, res, next) => {
                 detail[item.context.key] = item.message.replace(/"/g, '');
                 return detail;
             }, {});
-            return next(customError('validation error', 422, details));
+            return next(Exception('validation error', 422, details));
         });
 };

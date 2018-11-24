@@ -4,7 +4,7 @@ exports.apiResponse = (res, message, status = 200, content = null) => res.status
     content
 });
 
-exports.customError = (message, status = 500, detail = null) => {
+exports.Exception = (message, status = 500, detail = null) => {
     const err = new Error(message);
     err.status = status;
     if (detail) err.detail = detail;

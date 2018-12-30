@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-exports.boot = () => {
+exports.initialize = () => {
     mongoose.Promise = global.Promise;
     mongoose.connect(process.env.MONGO_CONNECTION, { useNewUrlParser: true });
 };

@@ -3,16 +3,21 @@ const logger = require('morgan');
 const bodyParser = require('body-parser');
 const helmet = require('helmet');
 const cors = require('cors');
+
+const httpError = require('./utils/http_error');
 // const mongodb = require('./models/mongodb');
 
 const apiGuard = require('./middlewares/request-handler/api_guard');
 const rateLimiter = require('./utils/rate_limiter');
-
 const routeHandler = require('./routes');
 const exceptionHandler = require('./exceptions');
 
 const app = express();
-// mongodb.boot();
+
+/** Initialize Singletons */
+httpError.initialize();
+// mongodb.initialize();
+/** */
 
 /** Plugins */
 app.use(helmet());

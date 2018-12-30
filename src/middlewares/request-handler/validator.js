@@ -1,5 +1,6 @@
 const Joi = require('joi');
-const { requestInput, Exception } = require('../../utils/helpers');
+const { requestInput } = require('../../utils/helpers');
+const HttpError = require('../../utils/http_error');
 
 module.exports = async (req, res, next) => {
     const input = requestInput(req);
@@ -15,6 +16,6 @@ module.exports = async (req, res, next) => {
                 detail[item.context.key] = item.message.replace(/"/g, '');
                 return detail;
             }, {});
-            return next(Exception('validation error', 422, details));
+            return next(HttpError.UnprocessableEntity('validation error', details));
         });
 };

@@ -1,19 +1,21 @@
 const config = require('../config/app');
+const HttpError = require('../utils/http_error');
 
 module.exports = (err, req, res, next) => {
+    const errorInstance = err.status ? err : HttpError.InternalServerError(err.message);
     const {
-        message,
         status = 500,
-        detail = undefined
-    } = err;
+        user_message: userMessage = 'something went wrong',
+        message_detail: messageDetail
+    } = errorInstance;
 
     let stack = err.stack;
     stack = stack && config.debug ? err.stack.split('\n').map(item => item.trim()) : undefined;
 
     return res.status(status).json({
-        message,
         status,
-        detail,
+        message: userMessage,
+        detail: messageDetail,
         stack
     });
 };

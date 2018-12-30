@@ -4,13 +4,6 @@ exports.apiResponse = (res, message, status = 200, content = null) => res.status
     content
 });
 
-exports.Exception = (message, status = 500, detail = null) => {
-    const err = new Error(message);
-    err.status = status;
-    if (detail) err.detail = detail;
-    return err;
-};
-
 exports.requestInput = req => ({
     query: req.query || null,
     params: req.params || null,

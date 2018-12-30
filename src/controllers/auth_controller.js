@@ -1,6 +1,6 @@
 'use strict';
 
-const { apiResponse } = require('../utils/helpers');
+const { HttpResponse } = require('../utils/helpers');
 const HttpError = require('../utils/http_error');
 const UserRepo = require('../repositories/user_repo');
 const JWT = require('../utils/jwt');
@@ -24,7 +24,7 @@ exports.login = async (req, res, next) => {
             expires_in: Config.expired
         };
 
-        return apiResponse(res, 'login successful', 200, response);
+        return HttpResponse(res, 'login successful', response);
     } catch (err) {
         return next(err);
     }
@@ -37,7 +37,7 @@ exports.logout = async (req, res, next) => {
 
         await user.update({ refreshToken: null, tokenValidity: null });
 
-        return apiResponse(res, 'invalidate refresh token successful', 200);
+        return HttpResponse(res, 'invalidate refresh token successful');
     } catch (err) {
         return next(err);
     }
@@ -62,7 +62,7 @@ exports.refresh = async (req, res, next) => {
             new_token: token
         };
 
-        return apiResponse(res, 'refresh token successful', 200, response);
+        return HttpResponse(res, 'refresh token successful', response);
     } catch (err) {
         return next(err);
     }

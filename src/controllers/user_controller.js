@@ -1,6 +1,6 @@
 'use strict';
 
-const { apiResponse } = require('../utils/helpers');
+const { HttpResponse } = require('../utils/helpers');
 const UserRepo = require('../repositories/user_repo');
 
 exports.profile = async (req, res, next) => {
@@ -10,7 +10,7 @@ exports.profile = async (req, res, next) => {
             name: user.name,
             username: user.username
         };
-        return apiResponse(res, 'successfully retrieved profile data', 200, response);
+        return HttpResponse(res, 'successfully retrieved profile data', response);
     } catch (err) {
         return next(err);
     }

@@ -1,4 +1,4 @@
-exports.apiResponse = (res, message, status = 200, content = null) => res.status(status).json({
+exports.HttpResponse = (res, message, content = null, status = 200) => res.status(status).json({
     message,
     status,
     content

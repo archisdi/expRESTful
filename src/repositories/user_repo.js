@@ -12,7 +12,7 @@ exports.findAll = async (conditions, attributes) => {
 
 exports.create = async (data) => {
     const db = await DBContext.getInstance();
-    return db.User.create(data);
+    return db.User.create(data, { transaction: await DBContext.getTransaction() });
 };
 
 module.exports = exports;

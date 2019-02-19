@@ -7,7 +7,10 @@ let modelsInitialized = false;
 let models = null;
 
 exports.initialize = () => {
-    models = {};
+    models = {
+        session: null
+    };
+
     Mongoose.Promise = global.Promise;
     Mongoose.connect(process.env.MONGO_CONNECTION, { useNewUrlParser: true });
 
@@ -28,5 +31,34 @@ exports.getInstance = async () => {
     if (!modelsInitialized) await exports.initialize();
     return models;
 };
+
+exports.startSession = async () => {
+    if (!modelsInitialized) await exports.initialize();
+    models.session = await models.context.startSession();
+    models.session.startTransaction();
+};
+
+exports.endSession = () => {
+    if (models && models.session) {
+        models.session.endSession();
+        models.session = null;
+    }
+};
+
+exports.commit = async () => {
+    if (models && models.session) {
+        await models.session.commitTransaction();
+        exports.endSession();
+    }
+};
+
+exports.rollback = async () => {
+    if (models && models.session) {
+        await models.session.abortTransaction();
+        exports.endSession();
+    }
+};
+
+exports.getSession = () => models.session;
 
 module.exports = exports;

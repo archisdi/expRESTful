@@ -5,7 +5,7 @@ const Schema = mongoose.Schema;
 const LogSchema = new Schema({
     action: {
         type: String,
-        required: 'url required'
+        required: 'action required'
     },
     details: {
         type: Object
@@ -14,6 +14,6 @@ const LogSchema = new Schema({
         type: Date,
         default: Date.now
     }
-});
+}, { versionKey: false });
 
 module.exports = mongoose.model('Log', LogSchema);

@@ -1,7 +1,7 @@
 'use strict';
 
 const { HttpResponse } = require('../utils/helpers');
-const HttpError = require('../utils/http_error');
+const HttpError = require('../common/http_error');
 const UserRepo = require('../repositories/user_repo');
 const JWT = require('../utils/jwt');
 const Config = require('../config/jwt');

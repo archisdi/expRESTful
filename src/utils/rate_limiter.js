@@ -1,6 +1,6 @@
 const RateLimit = require('express-rate-limit');
 const config = require('../config/app');
-const HttpError = require('../utils/http_error');
+const HttpError = require('../common/http_error');
 
 module.exports = (max = config.rate.max, retry = config.rate.retry) => {
     const rateLimiter = new RateLimit({

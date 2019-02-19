@@ -1,5 +1,8 @@
-const Log = require('../models/mongodb/log');
+const { MongoContext } = require('../common');
 
-exports.create = datas => Log.create(datas);
+exports.create = async (datas) => {
+    const mongo = await MongoContext.getInstance();
+    return mongo.Log.create(datas);
+};
 
 module.exports = exports;

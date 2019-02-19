@@ -67,11 +67,11 @@ exports.closeContext = async () => {
     let result = null;
 
     if (models && models.context) {
-        console.log('Closing - DBContext');
+        console.info('Closing - DBContext'); // eslint-disable-line
         result = await models.context.close().catch((err) => {
-            console.error(`Error Closing DBContext: ${err.stack}`);
+            console.error(`Error Closing DBContext: ${err.stack}`); // eslint-disable-line
         });
-        console.log('Closed - DBContext');
+        console.info('Closed - DBContext'); // eslint-disable-line
     }
 
     models = null;

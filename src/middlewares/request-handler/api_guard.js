@@ -1,5 +1,5 @@
 const config = require('../../config/app');
-const HttpError = require('../../utils/http_error');
+const HttpError = require('../../common/http_error');
 
 module.exports = (req, res, next) => {
     if (req.query.secret !== config.apiKey && req.headers.secret !== config.apiKey) {

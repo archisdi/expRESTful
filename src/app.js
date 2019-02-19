@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 const helmet = require('helmet');
 const cors = require('cors');
 
-const httpError = require('./utils/http_error');
+const httpError = require('./common/http_error');
 // const mongodb = require('./models/mongodb');
 
 const apiGuard = require('./middlewares/request-handler/api_guard');

@@ -4,8 +4,9 @@ const bodyParser = require('body-parser');
 const helmet = require('helmet');
 const cors = require('cors');
 
-const { HttpError, DBContext } = require('./common');
-// const mongodb = require('./models/mongodb');
+/** Common Services */
+const { HttpError, DBContext, MongoContext } = require('./common');
+/** */
 
 const apiGuard = require('./middlewares/request-handler/api_guard');
 const rateLimiter = require('./utils/rate_limiter');
@@ -17,7 +18,7 @@ const app = express();
 /** Initialize Singletons */
 HttpError.initialize();
 DBContext.initialize();
-// mongodb.initialize();
+MongoContext.initialize();
 /** */
 
 /** Plugins */

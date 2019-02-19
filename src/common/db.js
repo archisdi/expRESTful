@@ -35,3 +35,48 @@ exports.getInstance = async () => {
     if (!modelsInitialized) await exports.initialize();
     return models;
 };
+
+exports.startTransaction = async () => {
+    if (!modelsInitialized) await exports.initialize();
+    models.db_transaction = await models.context.transaction({
+        isolationLevel: models.context.Transaction.ISOLATION_LEVELS.READ_UNCOMMITTED
+    });
+};
+
+exports.endTransaction = () => {
+    models.db_transaction = null;
+};
+
+exports.getTransaction = () => models.db_transaction;
+
+exports.commit = async () => {
+    if (models && models.db_transaction) {
+        await models.db_transaction.commit();
+        exports.endTransaction();
+    }
+};
+
+exports.rollback = async () => {
+    if (models && models.db_transaction) {
+        await models.db_transaction.rollback();
+        exports.endTransaction();
+    }
+};
+
+exports.closeContext = async () => {
+    let result = null;
+
+    if (models && models.context) {
+        console.log('Closing - DBContext');
+        result = await models.context.close().catch((err) => {
+            console.error(`Error Closing DBContext: ${err.stack}`);
+        });
+        console.log('Closed - DBContext');
+    }
+
+    models = null;
+    modelsInitialized = false;
+    return result;
+};
+
+module.exports = exports;

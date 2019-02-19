@@ -1,4 +1,4 @@
-const DBContext = require('../common/db');
+const { DBContext } = require('../common');
 
 exports.findOne = async (conditions, attributes) => {
     const db = await DBContext.getInstance();

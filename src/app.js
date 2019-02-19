@@ -5,6 +5,7 @@ const helmet = require('helmet');
 const cors = require('cors');
 
 const httpError = require('./common/http_error');
+const db = require('../src/common/db');
 // const mongodb = require('./models/mongodb');
 
 const apiGuard = require('./middlewares/request-handler/api_guard');
@@ -16,6 +17,7 @@ const app = express();
 
 /** Initialize Singletons */
 httpError.initialize();
+db.initialize();
 // mongodb.initialize();
 /** */
 

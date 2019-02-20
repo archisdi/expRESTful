@@ -2,15 +2,15 @@
 
 const { HttpResponse } = require('../utils/helpers');
 const HttpError = require('../common/http_error');
-const UserRepository = require('../repositories/user_repo');
+const Repository = require('../repositories');
 const JWT = require('../utils/jwt');
 const Config = require('../config/jwt');
 const UserTransformer = require('../utils/transformers/user_transformer');
 
 exports.login = async (req, res, next) => {
     try {
-        const UserRepo = new UserRepository();
-        const user = await UserRepo.findOne({ username: req.body.username });
+        const Repo = new Repository();
+        const user = await Repo.get('user').findOne({ username: req.body.username });
         if (!user) throw HttpError.NotAuthorized('Credentials not match');
         if (!user.validateAuth(req.body.password)) throw HttpError.NotAuthorized('Credentials not match');
 
@@ -33,8 +33,8 @@ exports.login = async (req, res, next) => {
 
 exports.logout = async (req, res, next) => {
     try {
-        const UserRepo = new UserRepository();
-        const user = await UserRepo.findOne({ id: req.user.id, username: req.user.username });
+        const Repo = new Repository();
+        const user = await Repo.get('user').findOne({ id: req.auth.id, username: req.auth.username });
         if (!user) throw HttpError.NotAuthorized('Already logged out');
 
         await user.update({ refreshToken: null, tokenValidity: null });
@@ -47,8 +47,8 @@ exports.logout = async (req, res, next) => {
 
 exports.refresh = async (req, res, next) => {
     try {
-        const UserRepo = new UserRepository();
-        const user = await UserRepo.findOne({ refreshToken: req.body.refresh_token });
+        const Repo = new Repository();
+        const user = await Repo.get('user').findOne({ refreshToken: req.body.refresh_token });
         if (!user) throw HttpError.NotAuthorized('Not logged in');
 
         if (!user.validateRefresh()) {

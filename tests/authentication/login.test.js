@@ -1,7 +1,7 @@
 require('dotenv').config();
 const test = require('ava');
-const app = require('../../server');
 const request = require('supertest');
+const app = require('../../server');
 
 const apiSecret = process.env.API_SECRET;
 

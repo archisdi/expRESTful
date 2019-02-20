@@ -5,14 +5,13 @@ const path = require('path');
 const _ = require('lodash');
 
 const repoDirPath = '../repositories/';
-const { DBContext } = require('../common');
+let paths;
 
 const normalizeRepoName = (name) => {
     const splitted = name.split('_').slice(0, -1);
     return _.camelCase(splitted.join('_'));
 };
 
-let paths;
 const generateRepoPath = () => {
     if (!paths) {
         paths = fs.readdirSync(path.join(__dirname, repoDirPath)).reduce((acc, item) => {
@@ -24,11 +23,9 @@ const generateRepoPath = () => {
     return paths;
 };
 class RepoFactory {
-    constructor(context) {
-        this.context = context;
+    constructor() {
         this.instance = {};
         this.repoPath = generateRepoPath();
-        this.DBContext = DBContext;
     }
 
     get(repoName) {

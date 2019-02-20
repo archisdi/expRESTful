@@ -10,6 +10,7 @@ const UserTransformer = require('../utils/transformers/user_transformer');
 exports.login = async (req, res, next) => {
     try {
         const Repo = new Repository();
+
         const user = await Repo.get('user').findOne({ username: req.body.username });
         if (!user) throw HttpError.NotAuthorized('Credentials not match');
         if (!user.validateAuth(req.body.password)) throw HttpError.NotAuthorized('Credentials not match');
@@ -34,6 +35,7 @@ exports.login = async (req, res, next) => {
 exports.logout = async (req, res, next) => {
     try {
         const Repo = new Repository();
+
         const user = await Repo.get('user').findOne({ id: req.auth.id, username: req.auth.username });
         if (!user) throw HttpError.NotAuthorized('Already logged out');
 
@@ -48,6 +50,7 @@ exports.logout = async (req, res, next) => {
 exports.refresh = async (req, res, next) => {
     try {
         const Repo = new Repository();
+
         const user = await Repo.get('user').findOne({ refreshToken: req.body.refresh_token });
         if (!user) throw HttpError.NotAuthorized('Not logged in');
 
@@ -61,11 +64,9 @@ exports.refresh = async (req, res, next) => {
             username: user.username
         });
 
-        const response = {
+        return HttpResponse(res, 'refresh token successful', {
             new_token: token
-        };
-
-        return HttpResponse(res, 'refresh token successful', response);
+        });
     } catch (err) {
         return next(err);
     }

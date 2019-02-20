@@ -1,20 +1,30 @@
 exports.sequelize = {
-    table: process.env.DB_NAME || '',
-    username: process.env.DB_USERNAME || 'root',
-    password: process.env.DB_PASSWORD || '',
+    connection_string: process.env.DB_CONNECTION_STRING,
     options: {
-        port: process.env.DB_PORT || '3306',
-        dialect: process.env.DB_DIALECT || 'mysql',
-        host: process.env.DB_HOST || '127.0.0.1',
-        logging: process.env.APP_DEBUG === 'true' ? console.log : false, //eslint-disable-line
+        dialect: 'mysql',
+        logging: process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'development' ? false : undefined,
+        pool: {
+            min: 0,
+            max: 5,
+            idle: 10000,
+            evict: 10000,
+            acquire: 20000
+        },
         operatorsAliases: false
     }
 };
 
 exports.mongodb = {
-    connection_string: process.env.MONGO_CONNECTION_STRING || 'mongodb://127.0.0.1:27017/exprestful',
+    connection_string: process.env.MONGO_CONNECTION_STRING,
     options: {
         useNewUrlParser: true
+    }
+};
+
+exports.redis = {
+    connection_string: process.env.REDIS_CONNECTION_STRING,
+    options: {
+
     }
 };
 

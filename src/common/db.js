@@ -10,7 +10,7 @@ let models = null;
 
 exports.initialize = async () => {
     models = {};
-    const sequelize = new Sequelize(config.table, config.username, config.password, config.options);
+    const sequelize = new Sequelize(config.connection_string, config.options);
 
     const modelsDir = path.join(__dirname, '../models/sequelize');
     fs.readdirSync(modelsDir)

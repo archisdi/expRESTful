@@ -4,7 +4,9 @@ const bodyParser = require('body-parser');
 const helmet = require('helmet');
 const cors = require('cors');
 
-const { HttpError, DBContext, MongoContext } = require('./common');
+const {
+    HttpError, DBContext, MongoContext, RedisContext
+} = require('./common');
 const apiGuard = require('./middlewares/request-handler/api_guard');
 const rateLimiter = require('./utils/rate_limiter');
 const routeHandler = require('./routes');
@@ -17,6 +19,7 @@ const app = express();
 HttpError.initialize();
 DBContext.initialize();
 MongoContext.initialize();
+RedisContext.initialize();
 
 /** Plugins */
 app.use(helmet());

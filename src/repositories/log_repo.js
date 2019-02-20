@@ -1,8 +1,10 @@
-const { MongoContext } = require('../common');
+const BaseRepository = require('./base_repository');
 
-exports.create = async (data) => {
-    const mongo = await MongoContext.getInstance();
-    return mongo.Log.create(data);
-};
+class LogRepo extends BaseRepository {
+    async create(data) {
+        const mongo = await this.getMongoInstance();
+        return mongo.Log.create(data);
+    }
+}
 
-module.exports = exports;
+module.exports = LogRepo;

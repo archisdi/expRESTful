@@ -1,18 +1,20 @@
-const { DBContext } = require('../common');
+const BaseRepository = require('./base_repository');
 
-exports.findOne = async (conditions, attributes) => {
-    const db = await DBContext.getInstance();
-    return db.User.findOne({ where: conditions, attributes });
-};
+class UserRepo extends BaseRepository {
+    async findOne(conditions, attributes) {
+        const db = await this.getDbInstance();
+        return db.User.findOne({ where: conditions, attributes });
+    }
 
-exports.findAll = async (conditions, attributes) => {
-    const db = await DBContext.getInstance();
-    return db.User.findAll({ where: conditions, attributes });
-};
+    async findAll(conditions, attributes) {
+        const db = await this.getDbInstance();
+        return db.User.findAll({ where: conditions, attributes });
+    }
 
-exports.create = async (data) => {
-    const db = await DBContext.getInstance();
-    return db.User.create(data, { transaction: await DBContext.getTransaction() });
-};
+    async create(data) {
+        const db = await this.getDbInstance();
+        return db.User.create(data, { transaction: await this.getTransaction() });
+    }
+}
 
-module.exports = exports;
+module.exports = UserRepo;

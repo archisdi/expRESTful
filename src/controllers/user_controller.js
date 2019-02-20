@@ -1,21 +1,17 @@
 'use strict';
 
-const { MongoContext } = require('../common');
 const { HttpResponse } = require('../utils/helpers');
-const UserRepo = require('../repositories/user_repo');
-const LogRepo = require('../repositories/log_repo');
+const Repository = require('../repositories');
 
 exports.profile = async (req, res, next) => {
     try {
-        await MongoContext.startSession();
+        const Repo = new Repository();
 
         /** Example of SQL use */
-        const user = await UserRepo.findOne({ id: req.auth.id }, ['id', 'name', 'username']);
+        const user = await Repo.get('user').findOne({ id: req.auth.id }, ['id', 'name', 'username']);
 
         /** Example of mongo use */
-        await LogRepo.create({ action: 'view_profile' });
-
-        await MongoContext.commit();
+        await Repo.get('log').create({ action: 'view_profile' });
 
         return HttpResponse(res, 'successfully retrieved profile data', {
             name: user.name,

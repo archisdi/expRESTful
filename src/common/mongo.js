@@ -2,6 +2,8 @@ const fs = require('fs');
 const path = require('path');
 const Mongoose = require('mongoose');
 
+const { mongodb: config } = require('../config/database');
+
 const basename = path.basename(__filename);
 let modelsInitialized = false;
 let models = null;
@@ -12,7 +14,7 @@ exports.initialize = () => {
     };
 
     Mongoose.Promise = global.Promise;
-    Mongoose.connect(process.env.MONGO_CONNECTION, { useNewUrlParser: true });
+    Mongoose.connect(config.connection_string, config.options);
 
     const modelsDir = path.join(__dirname, '../models/mongodb');
     fs.readdirSync(modelsDir)

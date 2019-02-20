@@ -13,6 +13,9 @@ exports.profile = async (req, res, next) => {
         /** Example of mongo use */
         await Repo.get('log').create({ action: 'view_profile' });
 
+        /** Example of redis use */
+        await Repo.get('job').create(new Date().getTime(), `send email to ${req.auth.id}`);
+
         return HttpResponse(res, 'successfully retrieved profile data', {
             name: user.name,
             username: user.username

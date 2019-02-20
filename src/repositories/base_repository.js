@@ -1,11 +1,12 @@
 'use strict';
 
-const { DBContext, MongoContext } = require('../common');
+const { DBContext, MongoContext, RedisContext } = require('../common');
 
 class BaseRepository {
     constructor() {
         this.db = null;
         this.mongo = null;
+        this.redis = null;
     }
 
     async getDbInstance() {
@@ -16,6 +17,11 @@ class BaseRepository {
     async getMongoInstance() {
         if (!this.mongo) this.mongo = await MongoContext.getInstance();
         return this.mongo;
+    }
+
+    async getRedisInstance() {
+        if (!this.redis) this.redis = await RedisContext.getInstance();
+        return this.redis;
     }
 
     async getTransaction() { // eslint-disable-line

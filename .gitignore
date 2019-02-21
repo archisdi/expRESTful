@@ -4,6 +4,7 @@ dist/
 npm-debug.log
 yarn-error.log
 .env
+*.env
 coverage
 .nyc_output
 storage/*

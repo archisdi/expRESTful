@@ -2,9 +2,9 @@ const Joi = require('joi');
 const { requestInput } = require('../../utils/helpers');
 const HttpError = require('../../common/http_error');
 
-module.exports = async (req, res, next) => {
+module.exports = (schema, options = { stripUnknown: true, abortEarly: false }) => (req, res, next) => {
     const input = requestInput(req);
-    await Joi.validate(input, req.schema, { stripUnknown: true, abortEarly: false })
+    return Joi.validate(input, schema, options)
         .then((validated) => {
             req.query = validated.query;
             req.params = validated.params;

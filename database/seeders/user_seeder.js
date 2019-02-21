@@ -4,8 +4,6 @@ const uuid = require('uuid/v4');
 module.exports = {
     up: (queryInterface, Sequelize) => {
         const names = ['admin', 'archisdi'];
-        // for (let i = 0; i < 5; i++) {
-        // }
 
         const users = names.map(item => ({
             name: item,

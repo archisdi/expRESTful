@@ -34,6 +34,7 @@
     "mysql2": "^1.6.5",
     "randomstring": "^1.1.5",
     "sequelize": "^4.35.2",
+    "sequelize-cli": "^5.4.0",
     "uuid": "^3.2.1"
   },
   "devDependencies": {

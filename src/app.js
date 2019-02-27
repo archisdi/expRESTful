@@ -5,7 +5,7 @@ const helmet = require('helmet');
 const cors = require('cors');
 
 const {
-    HttpError, DBContext, MongoContext, RedisContext
+    HttpError, DBContext, MongoContext, RedisContext, Job
 } = require('./common');
 const apiGuard = require('./middlewares/request-handler/api_guard');
 const rateLimiter = require('./utils/rate_limiter');
@@ -20,6 +20,7 @@ HttpError.initialize();
 DBContext.initialize();
 MongoContext.initialize();
 RedisContext.initialize();
+Job.initialize();
 
 /** Plugins */
 app.use(helmet());

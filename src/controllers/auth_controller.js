@@ -1,7 +1,7 @@
 'use strict';
 
 const { HttpResponse } = require('../utils/helpers');
-const HttpError = require('../common/http_error');
+const { HttpError, Job } = require('../common');
 const Repository = require('../repositories');
 const JWT = require('../utils/jwt');
 const Config = require('../config/jwt');
@@ -25,6 +25,8 @@ exports.login = async (req, res, next) => {
             refresh_token: refresh.token,
             expires_in: Config.expired
         };
+
+        await Job.dispatch('log-user-auth', user);
 
         return HttpResponse(res, 'login successful', response);
     } catch (err) {

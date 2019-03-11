@@ -39,7 +39,7 @@ exports.logout = async (data, context) => {
     try {
         const Repo = new Repository();
 
-        const user = await Repo.get('user').findOne({ id: data.auth.id, username: data.auth.username });
+        const user = await Repo.get('user').find(context.id);
         if (!user) throw HttpError.NotAuthorized('Already logged out');
 
         await user.update({ refreshToken: null, tokenValidity: null });

@@ -7,7 +7,7 @@ module.exports = {
 
         const users = names.map(item => ({
             name: item,
-            uuid: uuid(),
+            id: uuid(),
             username: item,
             password: bcrypt.hashSync(item, 8),
             created_at: new Date(),

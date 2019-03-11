@@ -1,4 +1,4 @@
 module.exports = user => ({
-    uuid: user.uuid,
+    id: user.id,
     username: user.username
 });

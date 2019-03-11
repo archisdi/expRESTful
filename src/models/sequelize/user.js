@@ -4,16 +4,11 @@ const moment = require('moment');
 module.exports = function (sequelize, DataTypes) {
     const Member = sequelize.define('User', {
         id: {
-            type: DataTypes.INTEGER(10).UNSIGNED,
-            allowNull: false,
-            primaryKey: true,
-            autoIncrement: true,
-            field: 'id'
-        },
-        uuid: {
             type: DataTypes.UUID,
-            field: 'uuid',
-            defaultValue: DataTypes.UUIDV4
+            field: 'id',
+            defaultValue: DataTypes.UUIDV4,
+            allowNull: false,
+            primaryKey: true
         },
         name: {
             type: DataTypes.STRING(255),

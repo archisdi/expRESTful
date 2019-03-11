@@ -1,12 +1,12 @@
 const mongoose = require('mongoose');
-const uuid = require('uuid');
+const UUID = require('uuid');
 
 const Schema = mongoose.Schema;
 
 const LogSchema = new Schema({
-    uuid: {
+    id: {
         type: String,
-        default: uuid.v4
+        default: UUID.v4
     },
     action: {
         type: String,

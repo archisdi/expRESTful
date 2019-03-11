@@ -3,16 +3,11 @@
 module.exports = {
     up: (queryInterface, DataTypes) => queryInterface.createTable('users', {
         id: {
-            type: DataTypes.INTEGER(10).UNSIGNED,
-            allowNull: false,
-            primaryKey: true,
-            autoIncrement: true,
-            field: 'id'
-        },
-        uuid: {
             type: DataTypes.UUID,
-            field: 'uuid',
-            defaultValue: DataTypes.UUIDV4
+            field: 'id',
+            defaultValue: DataTypes.UUIDV4,
+            allowNull: false,
+            primaryKey: true
         },
         name: {
             type: DataTypes.STRING(255),

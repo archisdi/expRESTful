@@ -15,6 +15,7 @@
     "lint": "eslint --fix app/**"
   },
   "dependencies": {
+    "@google/maps": "^0.5.5",
     "bcryptjs": "^2.4.3",
     "body-parser": "~1.18.2",
     "cors": "^2.8.4",

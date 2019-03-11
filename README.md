@@ -1,2 +1,2 @@
-# expRESTful
-Express REST API server with laravel like features
+# ExpRESTful
+REST server made with express with laravel like features.

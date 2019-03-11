@@ -10,14 +10,10 @@ exports.ExpressRequestInput = req => ({
     body: req.body || null
 });
 
-exports.ExpressContextInput = req => ({
-    ...req.auth
-});
-
 exports.ExpressLogicAdapter = method => async (req, res, next) => {
     try {
         const data = exports.ExpressRequestInput(req);
-        const context = exports.ExpressContextInput(req && req.auth ? req.auth : null);
+        const context = req && req.auth ? req.auth : null;
 
         const {
             message = 'success', data: outData = {}

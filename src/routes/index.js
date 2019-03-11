@@ -1,5 +1,7 @@
-const DriverRoutes = require('../routes/driver_route');
+const AuthRoutes = require('../routes/auth_route');
+const UserRoutes = require('../routes/user_route');
 
 module.exports = (app) => {
-    app.use('/driver', DriverRoutes);
+    app.use('/auth', AuthRoutes);
+    app.use('/user', UserRoutes);
 };

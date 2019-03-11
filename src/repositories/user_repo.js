@@ -1,6 +1,11 @@
 const BaseRepository = require('./base_repository');
 
 class UserRepo extends BaseRepository {
+    async find(id, attributes) {
+        const db = await this.getDbInstance();
+        return db.User.findOne({ where: { id }, attributes });
+    }
+
     async findOne(conditions, attributes) {
         const db = await this.getDbInstance();
         return db.User.findOne({ where: conditions, attributes });

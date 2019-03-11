@@ -2,7 +2,7 @@
 
 const router = require('express').Router();
 
-const { login, logout, refresh } = require('../methods/driver/authentication');
+const { login, logout, refresh } = require('../methods/users/authentication');
 const { ExpressLogicAdapter: Logic } = require('../common/utils');
 
 const AuthRequest = require('../middlewares/request-validator/auth_request');

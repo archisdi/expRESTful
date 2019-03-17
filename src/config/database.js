@@ -2,7 +2,7 @@ exports.sequelize = {
     connection_string: process.env.DB_CONNECTION_STRING,
     options: {
         dialect: 'mysql',
-        logging: process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'development' ? false : undefined,
+        logging: process.env.NODE_ENV === 'production' ? false : console.log, // eslint-disable-line
         pool: {
             min: 0,
             max: 5,

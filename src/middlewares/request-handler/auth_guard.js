@@ -21,7 +21,7 @@ module.exports = async (req, res, next) => {
             const payload = await JWT.verify(token);
             req.auth = await generateContext(payload);
         } catch (err) {
-            const message = err.message === 'jwt expired' ? 'Token Expired' : 'Invalid Token';
+            const message = err.message === 'jwt expired' ? 'token expired' : 'invalid token';
             throw HttpError.NotAuthorized(message);
         }
         return next();

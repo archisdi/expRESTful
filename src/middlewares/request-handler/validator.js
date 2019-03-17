@@ -1,6 +1,5 @@
 const Joi = require('joi');
-const { Utils: { ExpressRequestInput: requestInput } } = require('../../common');
-const HttpError = require('../../common/http_error');
+const { Utils: { ExpressRequestInput: requestInput }, HttpError } = require('../../common');
 
 const defaultOptions = {
     stripUnknown: {

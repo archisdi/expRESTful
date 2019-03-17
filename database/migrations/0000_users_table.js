@@ -1,50 +1,48 @@
 'use strict';
 
+const tableName = 'users';
+
 module.exports = {
-    up: (queryInterface, DataTypes) => queryInterface.createTable('users', {
+    up: (queryInterface, DataTypes) => queryInterface.createTable(tableName, {
         id: {
             type: DataTypes.UUID,
-            field: 'id',
             defaultValue: DataTypes.UUIDV4,
             allowNull: false,
             primaryKey: true
         },
         name: {
             type: DataTypes.STRING(255),
-            allowNull: false,
-            field: 'name'
+            allowNull: false
         },
         username: {
             type: DataTypes.STRING(255),
             allowNull: false,
-            unique: true,
-            field: 'username'
+            unique: true
         },
         password: {
             type: DataTypes.STRING(255),
-            allowNull: false,
-            field: 'password'
+            allowNull: false
         },
-        refreshToken: {
+        refresh_token: {
             type: DataTypes.STRING(255),
-            allowNull: true,
-            field: 'refresh_token'
+            allowNull: true
         },
-        tokenValidity: {
+        token_validity: {
             type: DataTypes.DATE,
-            allowNull: true,
-            field: 'token_validity'
+            allowNull: true
         },
-        createdAt: {
+        created_at: {
             type: DataTypes.DATE,
-            allowNull: true,
-            field: 'created_at'
+            allowNull: true
         },
-        updatedAt: {
+        updated_at: {
             type: DataTypes.DATE,
-            allowNull: true,
-            field: 'updated_at'
+            allowNull: true
+        },
+        deleted_at: {
+            type: DataTypes.DATE,
+            allowNull: true
         }
     }),
-    down: (queryInterface, Sequelize) => queryInterface.dropTable('users')
+    down: (queryInterface, Sequelize) => queryInterface.dropTable(tableName)
 };

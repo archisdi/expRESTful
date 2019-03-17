@@ -1,4 +1,5 @@
 const BaseRepository = require('./base_repository');
+const { offset } = require('../utils/helpers');
 
 class UserRepo extends BaseRepository {
     async find(id, attributes) {
@@ -19,6 +20,16 @@ class UserRepo extends BaseRepository {
     async create(data) {
         const db = await this.getDbInstance();
         return db.User.create(data, { transaction: await this.getTransaction() });
+    }
+
+    async paginate(conditions, { page = 1, limit = 10 }, attributes) {
+        const db = await this.getDbInstance();
+        return db.User.findAndCountAll({
+            where: conditions,
+            limit,
+            offset: offset(page, limit),
+            attributes
+        });
     }
 }
 

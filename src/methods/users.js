@@ -4,6 +4,10 @@ const HttpError = require('../common/http_error');
 const Repository = require('../repositories');
 const Transformer = require('../utils/transformers/user_transformer');
 
+/**
+ * @description retrieve user profile
+ * @method GET
+ */
 exports.profile = async (data, context) => {
     try {
         const Repo = new Repository();

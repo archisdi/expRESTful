@@ -4,20 +4,26 @@ const HttpError = require('../common/http_error');
 const Repository = require('../repositories');
 const JWT = require('../utils/jwt');
 const Config = require('../config/jwt');
-const UserTransformer = require('../utils/transformers/user_transformer');
 
+/**
+ * @description authenticate and assign a token to given user
+ * @method POST
+ */
 exports.login = async (data, context) => {
     try {
         const Repo = new Repository();
 
         const user = await Repo.get('user').findOne({ username: data.body.username });
-        if (!user) throw HttpError.NotAuthorized('Credentials not match');
-        if (!user.validateAuth(data.body.password)) throw HttpError.NotAuthorized('Credentials not match');
+        if (!user) throw HttpError.NotAuthorized('credentials not match');
+        if (!user.validateAuth(data.body.password)) throw HttpError.NotAuthorized('credentials not match');
 
-        const token = await JWT.create(UserTransformer(user));
+        const token = await JWT.create({ uid: user.id });
         const refresh = await JWT.generateRefreshToken();
 
-        await user.update({ refreshToken: refresh.token, tokenValidity: refresh.validity });
+        await Repo.get('user').update(
+            { id: user.id },
+            { refresh_token: refresh.token, token_validity: refresh.validity }
+        );
 
         const response = {
             token,
@@ -35,14 +41,21 @@ exports.login = async (data, context) => {
     }
 };
 
+/**
+ * @description removes given user refresh token from database
+ * @method POST
+ */
 exports.logout = async (data, context) => {
     try {
         const Repo = new Repository();
 
         const user = await Repo.get('user').find(context.id);
-        if (!user) throw HttpError.NotAuthorized('Already logged out');
+        if (!user) throw HttpError.NotAuthorized('already logged out');
 
-        await user.update({ refreshToken: null, tokenValidity: null });
+        await Repo.get('user').update(
+            { id: user.id },
+            { refresh_token: null, token_validity: null }
+        );
 
         return {
             message: 'invalidate refresh token successful'
@@ -53,16 +66,22 @@ exports.logout = async (data, context) => {
     }
 };
 
+/**
+ * @description reassign a new token to given user from a refresh token
+ */
 exports.refresh = async (data, context) => {
     try {
         const Repo = new Repository();
 
         const user = await Repo.get('user').findOne({ refreshToken: data.body.refresh_token });
-        if (!user) throw HttpError.NotAuthorized('Not logged in');
+        if (!user) throw HttpError.NotAuthorized('not logged in');
 
         if (!user.validateRefresh()) {
-            await user.update({ refreshToken: null, tokenValidity: null });
-            throw HttpError.NotAuthorized('Refresh Token Expired');
+            await Repo.get('user').update(
+                { id: user.id },
+                { refresh_token: null, token_validity: null }
+            );
+            throw HttpError.NotAuthorized('refresh token expired');
         }
 
         const token = await JWT.create({

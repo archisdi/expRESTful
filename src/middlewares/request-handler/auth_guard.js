@@ -16,7 +16,7 @@ const generateContext = async (payload) => {
 module.exports = async (req, res, next) => {
     try {
         const token = req.headers.authorization;
-        if (!token) throw HttpError.NotAuthorized('Token Not Provided');
+        if (!token) throw HttpError.NotAuthorized('token not provided');
         try {
             const payload = await JWT.verify(token);
             req.auth = await generateContext(payload);

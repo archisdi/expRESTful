@@ -2,8 +2,17 @@ const Joi = require('joi');
 const { Utils: { ExpressRequestInput: requestInput } } = require('../../common');
 const HttpError = require('../../common/http_error');
 
-module.exports = (schema, options = { stripUnknown: true, abortEarly: false }) => (req, res, next) => {
+const defaultOptions = {
+    stripUnknown: {
+        arrays: false,
+        objects: true
+    },
+    abortEarly: false
+};
+
+module.exports = (schema, options = defaultOptions) => (req, res, next) => {
     const input = requestInput(req);
+
     return Joi.validate(input, schema, options)
         .then((validated) => {
             req.query = validated.query;

@@ -5,9 +5,9 @@ exports.ExpressHttpResponse = (res, message, content = null, status = 200) => re
 });
 
 exports.ExpressRequestInput = req => ({
-    query: req.query || null,
-    params: req.params || null,
-    body: req.body || null
+    query: req.query,
+    params: req.params,
+    body: req.body
 });
 
 exports.ExpressLogicAdapter = method => async (req, res, next) => {

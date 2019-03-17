@@ -1,8 +1,8 @@
 'use strict';
 
-const HttpError = require('../../common/http_error');
-const Repository = require('../../repositories');
-const Transformer = require('../../utils/transformers/user_transformer');
+const HttpError = require('../common/http_error');
+const Repository = require('../repositories');
+const Transformer = require('../utils/transformers/user_transformer');
 
 exports.profile = async (data, context) => {
     try {

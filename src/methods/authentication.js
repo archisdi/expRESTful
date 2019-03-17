@@ -1,10 +1,10 @@
 'use strict';
 
-const HttpError = require('../../common/http_error');
-const Repository = require('../../repositories');
-const JWT = require('../../utils/jwt');
-const Config = require('../../config/jwt');
-const UserTransformer = require('../../utils/transformers/user_transformer');
+const HttpError = require('../common/http_error');
+const Repository = require('../repositories');
+const JWT = require('../utils/jwt');
+const Config = require('../config/jwt');
+const UserTransformer = require('../utils/transformers/user_transformer');
 
 exports.login = async (data, context) => {
     try {

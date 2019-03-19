@@ -9,7 +9,6 @@ const bodyParser = require('body-parser');
 const helmet = require('helmet');
 const cors = require('cors');
 
-
 /** Configuration file */
 const { sequelize: DBConfig, mongodb: MongoConfig } = require('./config/database');
 const { MODELS_PATH } = require('./utils/constants');

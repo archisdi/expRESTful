@@ -61,7 +61,7 @@ module.exports = function (sequelize, DataTypes) {
     };
 
     Member.prototype.validateRefresh = function (password) {
-        return moment() < moment(this.tokenValidity);
+        return moment() < moment(this.token_validity);
     };
 
     return Member;

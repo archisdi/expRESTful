@@ -52,10 +52,7 @@ exports.logout = async (data, context) => {
         const user = await Repo.get('user').find(context.id);
         if (!user) throw HttpError.NotAuthorized('already logged out');
 
-        await Repo.get('user').update(
-            { id: user.id },
-            { refresh_token: null, token_validity: null }
-        );
+        await Repo.get('user').update({ id: user.id }, { refresh_token: null, token_validity: null });
 
         return {
             message: 'invalidate refresh token successful'
@@ -73,14 +70,11 @@ exports.refresh = async (data, context) => {
     try {
         const Repo = new Repository();
 
-        const user = await Repo.get('user').findOne({ refreshToken: data.body.refresh_token });
+        const user = await Repo.get('user').findOne({ refresh_token: data.body.refresh_token });
         if (!user) throw HttpError.NotAuthorized('not logged in');
 
         if (!user.validateRefresh()) {
-            await Repo.get('user').update(
-                { id: user.id },
-                { refresh_token: null, token_validity: null }
-            );
+            await Repo.get('user').update({ id: user.id }, { refresh_token: null, token_validity: null });
             throw HttpError.NotAuthorized('refresh token expired');
         }
 

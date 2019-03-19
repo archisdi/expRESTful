@@ -1,7 +1,7 @@
-const JWT = require('../../utils/jwt');
-const HttpError = require('../../common/http_error');
-const UserRepository = require('../../repositories/user_repo');
-const parseDataObject = require('../../utils/helpers').parseDataObject;
+const JWT = require('../utils/jwt');
+const HttpError = require('../common/http_error');
+const UserRepository = require('../repositories/user_repo');
+const parseDataObject = require('../utils/helpers').parseDataObject;
 
 const generateContext = async (payload) => {
     const UserRepo = new UserRepository();

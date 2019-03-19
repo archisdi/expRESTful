@@ -9,7 +9,10 @@ class UserRepo extends BaseRepository {
 
     async findOne(conditions, attributes) {
         const db = await this.getDbInstance();
-        return db.User.findOne({ where: conditions, attributes });
+        return db.User.findOne({
+            where: conditions,
+            attributes
+        });
     }
 
     async findAll(conditions, attributes) {
@@ -20,6 +23,14 @@ class UserRepo extends BaseRepository {
     async create(data) {
         const db = await this.getDbInstance();
         return db.User.create(data, { transaction: await this.getTransaction() });
+    }
+
+    async update(conditions, data) {
+        const db = await this.getDbInstance();
+        return db.User.update(data, {
+            where: conditions,
+            transaction: await this.getTransaction()
+        });
     }
 
     async paginate(conditions, { page = 1, limit = 10 }, attributes) {

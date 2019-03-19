@@ -5,12 +5,12 @@ const router = require('express').Router();
 const { login, logout, refresh } = require('../methods/authentication');
 const { ExpressLogicAdapter: Logic } = require('../common/utils');
 
-const AuthRequest = require('../middlewares/request-validator/auth_request');
-const AuthGuard = require('../middlewares/request-handler/auth_guard');
+const Validator = require('../middlewares/validator');
+const AuthGuard = require('../middlewares/auth_guard');
 
 /** Auth Routes */
-router.post('/login', AuthRequest('login'), Logic(login));
+router.post('/login', Validator('login'), Logic(login));
 router.post('/logout', AuthGuard, Logic(logout));
-router.post('/refresh', AuthRequest('refresh'), Logic(refresh));
+router.post('/refresh', Validator('refresh'), Logic(refresh));
 
 module.exports = router;

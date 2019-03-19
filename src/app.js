@@ -7,7 +7,7 @@ const cors = require('cors');
 const {
     HttpError, DBContext, MongoContext, Job
 } = require('./common');
-const apiGuard = require('./middlewares/request-handler/api_guard');
+const apiGuard = require('./middlewares/api_guard');
 const rateLimiter = require('./utils/rate_limiter');
 const routeHandler = require('./routes');
 const exceptionHandler = require('./exceptions');

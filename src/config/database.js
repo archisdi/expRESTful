@@ -9,8 +9,7 @@ exports.sequelize = {
             idle: 10000,
             evict: 10000,
             acquire: 20000
-        },
-        operatorsAliases: false
+        }
     }
 };
 

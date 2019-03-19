@@ -3,7 +3,7 @@
 const router = require('express').Router();
 
 const { profile } = require('../methods/users');
-const { ExpressLogicAdapter: Logic } = require('../common/utils');
+const { ExpressLogicAdapter: Logic } = require('../utils/express');
 const AuthGuard = require('../middlewares/auth_guard');
 
 /** User Routes */

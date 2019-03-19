@@ -1,5 +1,7 @@
+'use strict';
+
+const { HttpError } = require('node-common');
 const JWT = require('../utils/jwt');
-const HttpError = require('../common/http_error');
 const UserRepository = require('../repositories/user_repo');
 const parseDataObject = require('../utils/helpers').parseDataObject;
 

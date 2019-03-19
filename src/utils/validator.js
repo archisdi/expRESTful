@@ -1,7 +1,7 @@
 'use strict';
 
 const Joi = require('joi');
-const { HttpError } = require('../common');
+const { HttpError } = require('node-common');
 
 const schemas = {
     login: Joi.object({

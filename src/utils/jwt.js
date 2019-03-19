@@ -1,3 +1,5 @@
+'use strict';
+
 const JWT = require('jsonwebtoken');
 const RandomString = require('randomstring');
 const Moment = require('moment');

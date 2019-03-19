@@ -1,3 +1,5 @@
+'use strict';
+
 const { HttpError } = require('node-common');
 
 module.exports = (req, res, next) => {

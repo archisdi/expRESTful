@@ -1,3 +1,5 @@
+'use strict';
+
 exports.ExpressHttpResponse = (res, message, content = null, status = 200) => res.status(status).json({
     message,
     status,

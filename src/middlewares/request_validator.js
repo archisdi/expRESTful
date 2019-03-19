@@ -1,3 +1,5 @@
+'use strict';
+
 const { ExpressRequestInput } = require('../utils/express');
 const validator = require('../utils/validator');
 

@@ -1,3 +1,5 @@
+'use strict';
+
 exports.sequelize = {
     connection_string: process.env.DB_CONNECTION_STRING,
     options: {

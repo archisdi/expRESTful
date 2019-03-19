@@ -1,3 +1,5 @@
+'use strict';
+
 const { HttpError } = require('node-common');
 const config = require('../config/app');
 

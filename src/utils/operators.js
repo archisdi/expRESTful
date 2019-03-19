@@ -1,3 +1,5 @@
+'use strict';
+
 const db = require('sequelize');
 
 const Op = db.Op;

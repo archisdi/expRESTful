@@ -1,3 +1,5 @@
+'use strict';
+
 const ErrorException = require('./error_exception');
 const NotFoundException = require('./not_found_exception');
 

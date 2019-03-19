@@ -1,12 +1,20 @@
+'use strict';
+
+const {
+    HttpError, DBContext, MongoContext, JobWorker
+} = require('node-common');
 const express = require('express');
 const logger = require('morgan');
 const bodyParser = require('body-parser');
 const helmet = require('helmet');
 const cors = require('cors');
 
-const {
-    HttpError, DBContext, MongoContext, JobWorker
-} = require('./common');
+
+/** Configuration file */
+const { sequelize: DBConfig, mongodb: MongoConfig } = require('./config/database');
+const { MODELS_PATH } = require('./utils/constants');
+
+/** Handlers */
 const apiGuard = require('./middlewares/api_guard');
 const rateLimiter = require('./utils/rate_limiter');
 const routeHandler = require('./routes');
@@ -15,11 +23,11 @@ const exceptionHandler = require('./exceptions');
 /** Initialize Express */
 const app = express();
 
-/** Initialize Singletons */
+/** Initialize common modules */
 HttpError.initialize();
-DBContext.initialize();
-MongoContext.initialize();
-JobWorker.initialize();
+DBContext.initialize({ path: MODELS_PATH.SQL, config: DBConfig });
+MongoContext.initialize({ path: MODELS_PATH.MONGO, config: MongoConfig });
+JobWorker.initialize({ path: MODELS_PATH.REDIS });
 
 /** Plugins */
 app.use(helmet());
@@ -32,7 +40,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(apiGuard);
 app.use(rateLimiter());
 
-/** App Handlers */
+/** Register Handlers */
 routeHandler(app);
 exceptionHandler(app);
 

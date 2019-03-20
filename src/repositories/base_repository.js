@@ -3,7 +3,8 @@
 const { DBContext, MongoContext, RedisContext } = require('node-common');
 
 class BaseRepository {
-    constructor() {
+    constructor(context) {
+        this.context = context;
         this.db = null;
         this.mongo = null;
         this.redis = null;

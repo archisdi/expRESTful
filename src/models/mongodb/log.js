@@ -19,6 +19,6 @@ const LogSchema = new Schema({
         type: Date,
         default: Date.now
     }
-}, { versionKey: false });
+}, { versionKey: false, collection: 'logs' });
 
 module.exports = mongoose.model('Log', LogSchema);

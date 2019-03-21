@@ -2,7 +2,7 @@
 
 const { HttpError, JobWorker } = require('node-common');
 const Repository = require('../repositories');
-const JWT = require('../utils/jwt');
+const JWT = require('../utils/libs/jwt');
 const Config = require('../config/jwt');
 
 /**

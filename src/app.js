@@ -14,10 +14,10 @@ const { sequelize: DBConfig, mongodb: MongoConfig } = require('./config/database
 const { MODELS_PATH } = require('./utils/constants');
 
 /** Handlers */
-const apiGuard = require('./middlewares/api_guard');
-const rateLimiter = require('./utils/rate_limiter');
-const routeHandler = require('./routes');
-const exceptionHandler = require('./exceptions');
+const ApiGuard = require('./middlewares/api_guard');
+const RateLimiter = require('./utils/libs/rate_limiter');
+const RouteHandler = require('./routes');
+const ExceptionHandler = require('./exceptions');
 
 /** Initialize Express */
 const app = express();
@@ -36,11 +36,11 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 /** Global Middlewares */
-app.use(apiGuard);
-app.use(rateLimiter());
+app.use(ApiGuard);
+app.use(RateLimiter());
 
 /** Register Handlers */
-routeHandler(app);
-exceptionHandler(app);
+RouteHandler(app);
+ExceptionHandler(app);
 
 module.exports = app;

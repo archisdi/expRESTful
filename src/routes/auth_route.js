@@ -3,7 +3,7 @@
 const router = require('express').Router();
 
 const { login, logout, refresh } = require('../methods/authentication');
-const { ExpressLogicAdapter: Logic } = require('../utils/express');
+const { ExpressLogicAdapter: Logic } = require('../utils/libs/express');
 
 const Validator = require('../middlewares/request_validator');
 const AuthGuard = require('../middlewares/auth_guard');

@@ -2,7 +2,7 @@
 
 const { HttpError } = require('node-common');
 const RateLimit = require('express-rate-limit');
-const config = require('../config/app');
+const config = require('../../config/app');
 
 module.exports = (max = config.rate.max, retry = config.rate.retry) => {
     const rateLimiter = new RateLimit({

@@ -1,7 +1,7 @@
 'use strict';
 
-const { ExpressRequestInput } = require('../utils/express');
-const validator = require('../utils/validator');
+const { ExpressRequestInput } = require('../utils/libs/express');
+const validator = require('../utils/libs/validator');
 
 module.exports = schema => (req, res, next) => {
     const input = ExpressRequestInput(req);

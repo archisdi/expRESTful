@@ -1,12 +1,14 @@
 const mongoose = require('mongoose');
-const UUID = require('uuid');
+const uuid = require('uuid');
+require('mongoose-uuid2')(mongoose);
 
-const Schema = mongoose.Schema;
+const { Schema, model, Types } = mongoose;
+const options = { versionKey: false, timestamps: { createdAt: 'created_at', updatedAt: 'updated_at' }, toJSON: { virtuals: true } };
 
 const LogSchema = new Schema({
-    id: {
-        type: String,
-        default: UUID.v4
+    _id: {
+        type: Types.UUID,
+        default: uuid.v4
     },
     action: {
         type: String,
@@ -19,6 +21,6 @@ const LogSchema = new Schema({
         type: Date,
         default: Date.now
     }
-}, { versionKey: false, collection: 'logs' });
+}, { ...options, collection: 'logs' });
 
-module.exports = mongoose.model('Log', LogSchema);
+module.exports = model('Log', LogSchema);

@@ -26,7 +26,7 @@ const app = express();
 HttpError.initialize();
 DBContext.initialize({ path: MODELS_PATH.SQL, config: DBConfig });
 MongoContext.initialize({ path: MODELS_PATH.MONGO, config: MongoConfig });
-JobWorker.initialize({ path: MODELS_PATH.REDIS });
+JobWorker.initialize({ path: MODELS_PATH.JOB });
 
 /** Plugins */
 app.use(helmet());

@@ -1,4 +1,4 @@
-require('dotenv').config({ path: `./environments/${process.argv[2] ? process.argv[2] : 'local'}.env` });
+require('dotenv').config();
 
 const http = require('http');
 const app = require('./src/app');

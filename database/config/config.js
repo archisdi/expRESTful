@@ -1,4 +1,4 @@
-require('dotenv').config({ path: `../environments/${process.argv[3] ? process.argv[3] : 'local'}.env` });
+require('dotenv').config({ path: '../.env' });
 
 const generateConfig = (env) => {
     const [dialect, temp] = env.split('://');

@@ -68,6 +68,7 @@ exports.logout = async (data, context) => {
 
 /**
  * @description reassign a new token to given user from a refresh token
+ * @method POST
  */
 exports.refresh = async (data, context) => {
     try {

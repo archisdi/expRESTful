@@ -33,7 +33,7 @@
     "mongoose-uuid2": "^2.3.0",
     "morgan": "~1.9.0",
     "mysql2": "^1.6.5",
-    "node-common": "git+https://github.com/archisdi/node-common.git",
+    "tymon": "git+https://github.com/archisdi/tymon.git",
     "randomstring": "^1.1.5",
     "sequelize": ">=5.3.0",
     "sequelize-cli": "^5.5.0",

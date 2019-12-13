@@ -1,6 +1,6 @@
 'use strict';
 
-const { HttpError } = require('node-common');
+const { HttpError } = require('tymon');
 const RateLimit = require('express-rate-limit');
 const config = require('../../config/app');
 

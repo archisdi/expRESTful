@@ -1,6 +1,6 @@
 'use strict';
 
-const { HttpError } = require('node-common');
+const { HttpError } = require('tymon');
 const Repository = require('../repositories');
 const Transformer = require('../utils/transformers/user_transformer');
 

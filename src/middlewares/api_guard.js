@@ -1,6 +1,6 @@
 'use strict';
 
-const { HttpError } = require('node-common');
+const { HttpError } = require('tymon');
 const config = require('../config/app');
 
 module.exports = (req, res, next) => {

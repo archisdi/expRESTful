@@ -1,7 +1,7 @@
 'use strict';
 
 const Joi = require('@hapi/joi');
-const { HttpError } = require('node-common');
+const { HttpError } = require('tymon');
 
 const schemas = {
     login: Joi.object({

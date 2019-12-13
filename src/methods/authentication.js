@@ -1,6 +1,6 @@
 'use strict';
 
-const { HttpError, JobWorker } = require('node-common');
+const { HttpError } = require('tymon');
 const Repository = require('../repositories');
 const JWT = require('../utils/libs/jwt');
 const Config = require('../config/jwt');
@@ -30,9 +30,6 @@ exports.login = async (data, context) => {
             refresh_token: refresh.token,
             expires_in: Config.expired
         };
-
-        /** Dispatch async job */
-        await JobWorker.dispatch('log-user-login', user);
 
         return {
             message: 'login successful',

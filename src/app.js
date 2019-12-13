@@ -1,8 +1,8 @@
 'use strict';
 
 const {
-    HttpError, DBContext, MongoContext, JobWorker
-} = require('node-common');
+    HttpError, DBContext, MongoContext
+} = require('tymon');
 const express = require('express');
 const logger = require('morgan');
 const bodyParser = require('body-parser');
@@ -10,7 +10,6 @@ const helmet = require('helmet');
 const cors = require('cors');
 
 /** Configuration file */
-const { sequelize: DBConfig, mongodb: MongoConfig } = require('./config/database');
 const { MODELS_PATH } = require('./utils/constants');
 
 /** Handlers */
@@ -24,9 +23,14 @@ const app = express();
 
 /** Initialize common modules */
 HttpError.initialize();
-DBContext.initialize({ path: MODELS_PATH.SQL, config: DBConfig });
-MongoContext.initialize({ path: MODELS_PATH.MONGO, config: MongoConfig });
-JobWorker.initialize({ path: MODELS_PATH.JOB });
+DBContext.initialize({
+    connection_string: String(process.env.DB_CONNECTION_STRING),
+    models_path: MODELS_PATH.SQL
+});
+MongoContext.initialize({
+    connection_string: String(process.env.MONGO_CONNECTION_STRING),
+    database: 'MONGO_DB_NAME'
+});
 
 /** Plugins */
 app.use(helmet());

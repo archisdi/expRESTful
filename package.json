@@ -21,7 +21,7 @@
     "cors": "^2.8.4",
     "debug": "~2.6.9",
     "dotenv": "^5.0.1",
-    "express": "^4.16.4",
+    "express": "^4.17.3",
     "express-rate-limit": "^2.11.0",
     "helmet": "^3.15.1",
     "ioredis": "^4.6.2",
